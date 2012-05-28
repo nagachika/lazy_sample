@@ -1,0 +1,11 @@
+!!! Strict
+%html
+%head
+  %title  Ask last name
+%body
+  %div last name:
+  %form{:action => "/", :method => "post"}
+    %input{:type => "text", :name => "last_name" }
+    %input{:type => "submit", :name => "send" }
+
+
