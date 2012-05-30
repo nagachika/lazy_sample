@@ -28,15 +28,19 @@ class LazyApp
     Base64.strict_encode64(r.bytes(16))
   end
 
+  def load_template(name)
+    Haml::Engine.new(IO.read(File.expand_path("../../views/#{name}.haml", __FILE__)))
+  end
+
   def setup_chain(session)
     first_name = last_name = nil
     session.add_chain do |req|
-      haml = Haml::Engine.new(IO.read(File.expand_path("../../views/first_name.haml", __FILE__)))
+      haml = load_template("first_name")
       [200, {"Content-Type" => "text/html"}, [haml.render]]
     end
     session.add_chain do |req|
       first_name = req.params["first_name"]
-      haml = Haml::Engine.new(IO.read(File.expand_path("../../views/last_name.haml", __FILE__)))
+      haml = load_template("last_name")
       [200, {"Content-Type" => "text/html"}, [haml.render]]
     end
     session.add_chain do |req|
