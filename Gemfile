@@ -1,4 +1,4 @@
 source "https://rubygems.org"
 
-gem "rack", "~> 1.4.0"
+gem "rack"
 gem "haml", "> 0"
